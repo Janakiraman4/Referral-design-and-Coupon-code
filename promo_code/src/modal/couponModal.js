@@ -15,7 +15,7 @@ const couponSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    isValid:{
+    isCouponValid:{
         type:Boolean,
         required:true,
         default:true

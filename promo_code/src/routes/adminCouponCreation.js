@@ -12,7 +12,7 @@ router.post('/admin/couponCreation' , async (req,res)=>{
    if(!isAdmin) return res.status(400).send({"message": "Invalid credentials"})
    if(isAdmin.role!=='ADMIN') return res.status(402).send('You are not authorized to create token')
    const createdCoupon= new couponModal({couponCode:req.body.couponCode ,
-     applicableCategory:req.body.applicableCategory})
+     applicableCategory:req.body.applicableCategory , isCouponValid:req.body.isCouponValid})
     await createdCoupon.save()
     res.status(200).send(createdCoupon)
 })
