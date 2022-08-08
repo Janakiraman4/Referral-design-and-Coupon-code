@@ -1,0 +1,274 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "API Documentation"
+    },
+    "host": "localhost:3000",
+    "tags": [
+        {
+            "name":"Admin",
+            "description":"API for Admins in the system"
+          },
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      },
+      {
+        "name": "Register",
+        "description": "API for registering users/admins in the system"
+      }
+    ],
+    "paths": {
+      "/admin/couponCreation": {
+        "post": {
+          "summary": "Admin Coupon Creation",
+          "tags": [
+            "Admin"
+          ],
+          "parameters": [
+            {
+              "name": "Admin",
+              "in": "body",
+              "description": "Coupon creation",
+              "schema": {
+                "$ref": "#/definitions/CouponCreation"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Coupon creation Successfull",
+              "schema": {
+                "$ref": "#/definitions/Coupon creation result"
+              }
+            
+            }
+          }
+        }
+      },
+      "/admin/couponList":{
+        "get":{
+            "summary":"Coupon List",
+            "tags":["Admin"],
+            "responses": {
+              "200": {
+                "description": "Fetched coupon list",
+                "schema": {
+                  "$ref": "#/definitions/GeneralResult"
+                }
+              }
+            }
+        }
+      },
+      "/admin/updatingCoupon":{
+        "patch":{
+            "summary":"Updating Coupon based on id",
+            "tags":["Admin"],
+            "parameters": [
+              {
+                "name": "Admin",
+                "in": "body",
+                "description": "Coupon updating information based on id",
+                "schema": {
+                  "$ref": "#/definitions/Updating coupon"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Updated coupon information based on id",
+                "schema": {
+                  "$ref": "#/definitions/GeneralResult"
+                }
+              }
+            }
+        }
+      },
+      "/admin/deletingCoupon":{
+        "delete":{
+            "summary":"Deleting Coupon",
+            "tags":["Admin"],
+            "parameters": [
+              {
+                "name": "Admin",
+                "in": "body",
+                "description": "Deleting coupon information",
+                "schema": {
+                  "$ref": "#/definitions/Coupon"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Deleted coupon information",
+                "schema": {
+                  "$ref": "#/definitions/GeneralResult"
+                }
+              }
+            }
+        }
+      },
+      "user/Apply_Coupon":{
+        "get":{
+            "summary":"Deleting Coupon",
+            "tags":["Users"],
+            "responses": {
+              "200": {
+                "description": "Result",
+                "schema": {
+                  "$ref": "#/definitions/Final Result"
+                }
+              }
+            }
+        }
+      },
+      "/register":{
+        "post":{
+            "summary":"Creating user/admin",
+            "tags":["Register"],
+            "parameters": [
+              {
+                "name": "Register",
+                "in": "body",
+                "description": "Registering user/admin",
+                "schema": {
+                  "$ref": "#/definitions/register"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Registered user's information",
+                "schema": {
+                  "$ref": "#/definitions/registered user"
+                }
+              }
+            }
+        }
+      }
+    },
+
+
+    "definitions": {
+        "CouponCreation": {
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "couponCode":{
+                "type":"string"
+              },
+              "applicableCategory":{
+                "type":"string"
+              }
+            }
+          },
+          "GeneralResult":{
+            "properties": {
+              "couponCode": {
+                "type": "string"
+              },
+               "discountOff": {
+                "type": "string"
+              },
+              "applicableCategory": {
+                "type": "string"
+              },
+              "isCouponValid": {
+                "type": "string"
+              }
+            }
+          },
+          "Coupon": {
+            "properties": {
+
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          
+          "Updating coupon":{
+            "properties": {
+                "username":{
+                    "type":"string"
+                },
+                "password":{
+                    "type":"string"
+                },
+                "couponCode": {
+                "type": "string"
+              },
+               "discountOff": {
+                "type": "string"
+              },
+              "applicableCategory": {
+                "type": "string"
+              },
+              "isCouponValid": {
+                "type": "string"
+              }
+            }
+          },
+          "Final Result":{
+            "properties":{
+            "total":{
+                "type":"string"
+            },
+            "couponUsed":{
+                "type":"string"
+            },
+            "purchasingCategory":{
+                "type":"string"
+            }
+        }
+    },
+          "register":{
+            "properties":{
+            "username":{
+                "type":"string"
+            },
+            "email":{
+                "type":"string"
+            },
+            "password":{
+                "type":"string"
+            },
+            "role":{
+                "type":"string"
+            }
+        
+        }
+    },
+    "registered user":{
+      "properties":{
+      "username":{
+          "type":"string"
+      },
+      "email":{
+          "type":"string"
+      },
+      "password":{
+          "type":"string"
+      },
+      "role":{
+          "type":"string"
+      },
+      "referralLink":{
+          "type":"string"
+      },
+      "wallet":{
+        "type":"number"
+      }
+  
+  }
+}
+}
+}

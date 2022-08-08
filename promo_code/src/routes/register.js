@@ -6,7 +6,7 @@ require('../db/mongoose')
 app.use(express.json())
 
 
-router.post('/user' , async(req , res)=>{
+router.post('/register' , async(req , res)=>{
 try {
     const user = new registerModal(req.body)
     if(!user) return res.status(400).send("Given data is invalid")
