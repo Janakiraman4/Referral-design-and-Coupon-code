@@ -32,7 +32,7 @@ const couponSchema = new mongoose.Schema({
 })
 
 
-const couponModal = mongoose.model("Coupon" , couponSchema) 
+const couponModal = mongoose.model("Coupon" , couponSchema)
 
 
 

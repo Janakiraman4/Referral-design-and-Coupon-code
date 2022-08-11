@@ -1,14 +1,12 @@
 const express= require('express')
 const router= new express.Router()
 const app= express()
-
-const userApplyingCoupon= require('../helper/applyingCoupon')
 app.use(express.json())
+const cListHelper= require('../helper/couponList')
 
 
+router.get('/admin/couponList' , cListHelper.couponList)
 
-
-router.get('/user/Apply_Coupon' , userApplyingCoupon.applyingCoupon)
 
 
 module.exports=router

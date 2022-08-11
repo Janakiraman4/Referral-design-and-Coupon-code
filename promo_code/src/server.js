@@ -3,54 +3,49 @@ const app= express()
 const port = process.env.PORT || 3000;
 app.use(express.json())
 require('dotenv/config')
-require('./db/mongoose')
-const swaggerUi = require('swagger-ui-express');
+
+ const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc=  require('swagger-jsdoc')
-const registerRoute= require('./routes/register')
-const adminCouponCreationRoute= require('./routes/adminCouponCreation')
-const couponListRoute = require('./routes/couponList')
-const updatingCouponDetails= require('./routes/updatingCouponDetails')
-const deletingCoupon= require('./routes/deletingCoupon')
-const applyingCoupon= require('./routes/applyingCoupon')
+const registerRoute= require('./helper/register')
+const adminCouponCreationRoute= require('./helper/adminCouponCreation')
+const updatingCouponDetails= require('./helper/updatingCouponDetails')
+const deletingCoupon= require('./helper/deletingCoupon')
+const applyingCoupon= require('./helper/applyingCoupon')
 const swaggerDocument = require('../swagger.json');
+const mongoose = require("mongoose");
+
 
 app.use(registerRoute)
-app.use(adminCouponCreationRoute)
-app.use(couponListRoute)
+app.use('/api/v1' , require('./routes/adminCouponCreationRoutes'))
+app.use('/api/v1' , require('./routes/couponListRouter'))
 app.use(updatingCouponDetails)
-app.use(deletingCoupon)
-app.use(applyingCoupon)
+app.use('/api/v1' , require('./routes/deletingCouponRoute'))
+app.use('/api/v1' , require('./routes/applyingCoupon'))
 
-// const options={
-//     definition:{
-//       openapi:"3.0.0",
-//       info:{
-//         title:"Swagger Setup",
-//         version:"1.0.0",
-//         description:"Nodejs Referral and Coupon setup"
-//       },
-//       servers:[
-//         {
-//           url:'http://localhost:3000'
-//         }
-//       ]
-//     },
-//     apis:['./routes/*.js']
-// }
-//   const specs = swaggerJsDoc(swaggerDocument)
   
-  app.use("/api-doc" , swaggerUi.serve , swaggerUi.setup(swaggerDocument))
+app.use("/api-doc" , swaggerUi.serve , swaggerUi.setup(swaggerDocument))
+
+
+mongoose.connect("mongodb://127.0.0.1:27017/promoCode", {
+  useNewUrlParser: true,
+}).then((data) => {console.log("Connected to database...")})
+.catch((err) => {
+  console.error("Could not connect to database ...")
+  console.log(err);
+});
+
 
 
 app.listen(port ,()=>{
     console.log('Runnin')
 })
 
-// ,
-//     paths:{
-//         "/Admin":{
-//             get:{
-//                 tags:"Admin"
-//             }
-//     },
-//   }
+
+
+// mongoose
+//   .connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
+//   .then((data) => {console.log("Connected to database...")})
+//   .catch((err) => {
+//     console.error("Could not connect to database ...")
+//     console.log(err);
+//   });
